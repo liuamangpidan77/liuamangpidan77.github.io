@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # VBlog
 
 ![](https://img.shields.io/badge/vue-2.5.2-brightgreen.svg) ![](https://img.shields.io/badge/element--ui-2.3.5-brightgreen.svg) ![](https://img.shields.io/badge/vant-1.1.2-brightgreen.svg)
@@ -156,3 +157,6 @@ Code licensed under the [Mozilla](LICENSE).
 
   [1]: https://github-laziji.github.io
   [2]: https://github.com/GitHub-Laziji/GitHub-Laziji.github.io
+=======
+# test
+>>>>>>> 6b67533faeb770c1addf2a0858645aa0db29bc33
