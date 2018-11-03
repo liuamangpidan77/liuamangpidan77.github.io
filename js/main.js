@@ -1,33 +1,111 @@
-$(document).ready(function() {
 
+function main() {
 
-  $('a.blog-button').click(function() {
-    // If already in blog, return early without animate overlay panel again.
-    if (location.hash && location.hash == "#blog") return;
-    if ($('.panel-cover').hasClass('panel-cover--collapsed')) return;
-    $('.main-post-list').removeClass('hidden');
-    currentWidth = $('.panel-cover').width();
-    if (currentWidth < 2000) {
-      $('.panel-cover').addClass('panel-cover--collapsed');
+(function () {
+   'use strict';
+   
+   // jQuery to collapse the navbar on scroll
+$(window).scroll(function() {
+    if ($(".navbar").offset().top > 50) {
+        $(".navbar-fixed-top").addClass("top-nav-collapse");
     } else {
-      $('.panel-cover').css('max-width',currentWidth);
-      $('.panel-cover').animate({'max-width': '320px', 'width': '22%'}, 400, swing = 'swing', function() {} );
+        $(".navbar-fixed-top").removeClass("top-nav-collapse");
     }
-
-    
-  });
-
-  if (window.location.hash && window.location.hash == "#blog") {
-    $('.panel-cover').addClass('panel-cover--collapsed');
-    $('.main-post-list').removeClass('hidden');
-  }
-
-  if (window.location.pathname.substring(0, 5) == "/tag/") {
-    $('.panel-cover').addClass('panel-cover--collapsed');
-  }
-
-  $('.btn-mobile-menu__icon').click(function() {
-    // 导航按钮被点击
-    // this.style.backgroundColor = '#fff'; 设置颜色后会自动消失
-  });  
 });
+
+   // Testimonial Slider
+  	$('a.page-scroll').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html,body').animate({
+              scrollTop: target.offset().top - 40
+            }, 900);
+            return false;
+          }
+        }
+      });
+
+    /*====================================
+    Show Menu on Book
+    ======================================*/
+    $(window).bind('scroll', function() {
+        var navHeight = $(window).height() - 100;
+        if ($(window).scrollTop() > navHeight) {
+            $('.navbar-default').addClass('on');
+        } else {
+            $('.navbar-default').removeClass('on');
+        }
+    });
+
+    $('body').scrollspy({ 
+        target: '.navbar-default',
+        offset: 80
+    })
+
+  	$(document).ready(function() {
+  	    $("#testimonial").owlCarousel({
+        navigation : false, // Show next and prev buttons
+        slideSpeed : 300,
+        paginationSpeed : 400,
+        singleItem:true
+        });
+
+  	});
+
+  	/*====================================
+    Portfolio Isotope Filter
+    ======================================*/
+    $(window).load(function() {
+        var $container = $('.portfolio-items');
+        $container.isotope({
+            filter: '*',
+            animationOptions: {
+                duration: 750,
+                easing: 'linear',
+                queue: false
+            }
+        });
+        $('.cat a').click(function() {
+            $('.cat .active').removeClass('active');
+            $(this).addClass('active');
+            var selector = $(this).attr('data-filter');
+            $container.isotope({
+                filter: selector,
+                animationOptions: {
+                    duration: 750,
+                    easing: 'linear',
+                    queue: false
+                }
+            });
+            return false;
+        });
+
+    });
+	
+	// ****************************************************************
+// counterUp
+// ****************************************************************
+
+	$(document).ready(function( $ ) {
+		if($("span.count").length > 0){	
+			$('span.count').counterUp({
+					delay: 10, // the delay time in ms
+			time: 1000 // the speed time in ms
+			});
+		}
+	});
+
+  	/*====================================
+    Pretty Photo
+    ======================================*/
+	$("a[rel^='prettyPhoto']").prettyPhoto({
+		social_tools: false
+	});	
+
+}());
+
+
+}
+main();
